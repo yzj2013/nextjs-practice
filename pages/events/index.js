@@ -1,23 +1,17 @@
-const Page = () => {
-  return (
-    <div>
-      <h1>Events Page</h1>
-      <div>
-        <a href=''>
-          <img />
-          <h2> Events in London</h2>
-        </a>
-        <a href=''>
-          <img />
-          <h2> Events in San Francisco</h2>
-        </a>
-        <a href=''>
-          <img />
-          <h2> Events in Barcelona</h2>
-        </a>
-      </div>
-    </div>
-  );
+import AllEvents from '../../src/components/events/events-page';
+
+const EventsPage = ({ data }) => {
+  return <AllEvents data={data}></AllEvents>;
 };
 
-export default Page;
+export default EventsPage;
+
+export async function getStaticProps() {
+  const { events_categories } = await import('/data/data.json');
+  console.log(events_categories);
+  return {
+    props: {
+      data: events_categories,
+    },
+  };
+}
